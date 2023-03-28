@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --primary-color: #906ecd;
+    --primary-color-hover : #8157d1;
+    --secondry-color: #b4aac5;
+    --light-color: #f3f4f9;
+    --text-dark: darkgray;
+    --danger-color : #FF4C5C;
+    --danger-color-hover : #d83d4a;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Inter', sans-serif;
+    font-family: 'Manrope', sans-serif;
+}
+
+a { 
+    text-decoration: none;
+    color: inherit; 
+}
+
+ul, ol {
+    list-style-type: none;
+}
+
+label{
+    font-weight: 500;
+}
+
+input, textarea {
+    border-radius: 3px;
+    border: none;
+    padding: 0.3rem 0.5em;
+    background-color: var(--light-color);
+}
+input:focus, textarea:focus{
+    outline-color:var(--primary-color);
+}
+input::placeholder{
+    color:var(--text-dark);
+}
+input[type=search]:focus{
+    outline:none;
+}
+#file-button{
+    background-color: var(--primary-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+    margin: 0;
+}
+
+section{
+    background-color: white;
+}
+
+button{
+    border: none;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+button:hover{
+    background-color: var(--primary-color-hover);
+    transform: scale(1.05);
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td,th{
+    padding: 0.5rem;
+    text-align: center;
+    border-bottom: 1px solid #f3f4f9;
+}
+
+thead, tbody tr { 
+    display:table; 
+    width:100%; 
+    table-layout:fixed;
+}
+
+tbody { 
+    display:block; 
+    height:350px; 
+    overflow:auto; 
+}
+
+tbody tr:hover{
+    background-color: var(--light-color);
+    cursor: pointer;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+    
+::-webkit-scrollbar-track {
+background-color: #f2f2f2;
+}
+
+::-webkit-scrollbar-thumb {
+background-color: var(--secondry-color);
+border-radius: 5px;
+}
+
+/* ------------------------------------ CLASSES ----------------------------------------- */
+.bg-primary-color{
+    background-color: var(--primary-color);
+}
+.bg-secondary-color{
+    background-color: var(--secondry-color);
+}
+
+.bg-white{
+    background-color: white;
+}
+.bg-light{
+    background-color:var(--light-color);
+}
+
+.text-primary-color{
+    color: var(--primary-color);
+}
+
+.text-dark{
+    color: var(--text-dark)
+}
+
+
+.product-management-conatiner{
+    background-color: var(--primary-color)
+}
+
+.btn-edit{
+    background-color: var(--primary-color);
+    color: white;
+}
+.btn-edit:hover{
+    background-color: var(--primary-color-hover);
+}
+
+.btn-delete{
+    background-color: var(--danger-color);
+    color: white;
+}
+.btn-delete:hover{
+    background-color: var(--danger-color-hover);
+}
+.product-table{
+    
+}
