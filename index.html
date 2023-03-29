@@ -48,11 +48,11 @@
                             <div class="row">
                                 <div class="d-flex flex-column col" >
                                     <label for="product-name" class=" text-dark mb-2">Name of Product *</label>
-                                    <input id="product-name" class="mb-2" type="text" placeholder="Enter a name" >
+                                    <input id="product-name" class="mb-2" type="text" placeholder="Enter a name" required >
                                 </div>
                                 <div class="d-flex flex-column col">
                                     <label for="product-price"  class="mb-2">Price*</label>
-                                    <input id="product-price" class="mb-2" type="text" placeholder="Enter a price" >
+                                    <input id="product-price" class="mb-2" type="number" min="0" step="0.01" placeholder="Enter a price" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -78,7 +78,7 @@
                         <h5 class="flex-grow-1 text-primary-color">Product list</h5>
                         <div class="search-box d-flex">
                             <i class="fa-solid fa-magnifying-glass bg-light p-2 text-dark rounded-start"></i>
-                            <input type="search" placeholder="search">
+                            <input id="search-input" type="search" placeholder="search product ID"/>
                         </div>
                     </div>
 
@@ -86,28 +86,27 @@
                         <table class="product-table">
                             <thead>
                               <tr class="bg-light">
-                                <th >#ID<i class="fa-solid fa-sort mx-1"></i></th>
-                                <th>Image</th>
-                                <th>Name<i class="fa-solid fa-sort mx-1"></i></th>
-                                <th>Price<i class="fa-solid fa-sort mx-1"></i></th>
+                                <th>
+                                    #ID 
+                                    <i onclick="sortIdAsc()" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
+                                    <i onclick="sortIdDesc()" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
+                                </th>
+                                <th>Image
+                                   
+                                </th>
+                                <th>Name
+                                    <i onclick="sortNameAsc()" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
+                                    <i onclick="sortNameDesc()" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
+                                </th>
+                                <th>price 
+                                    <i onclick="sortPriceAsc()" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
+                                    <i onclick="sortPriceDesc()" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
+                                </th>
                                 <th>Action</th>
                               </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <img class="rounded-circle" src="./Images/book-1.png" alt="" width="30px" height="30px">
-                                    </td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>
-                                        <button class="btn-edit p-2 me-2"><i class="fa-solid fa-pen-to-square"></i></button>
-                                        <button class="btn-delete p-2"><i class="fa-solid fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                
-                                
+                                <!-- here products are listed -->
                             </tbody>
                         </table>  
                     </div>
