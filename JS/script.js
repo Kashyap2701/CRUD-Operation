@@ -11,24 +11,29 @@ const productDescription = document.querySelector('#product-desc');
 let productList = JSON.parse(localStorage.getItem('productList')) || [];
 
 let curImageFileURL='';
-let index=0;
+// let index=0;
 
 window.onload = renderProductData();
 
+// IMAGE FILE CHANGE EVENT
 productImageFile.addEventListener('change',(e)=>{
     console.log(e.target.files[0]);
     let reader = new FileReader();
     reader.addEventListener('load',(e)=>{
         curImageFileURL = e.target.result;
+        console.log(curImageFileURL);
     })
     reader.readAsDataURL(productImageFile.files[0]);
+    
 })
 
+// ADD DATA FORM SUBMIT EVENT
 productForm.addEventListener('submit',(e)=>{
     e.preventDefault();
     addProductData();
 })
 
+// SEARCH DATA EVENT
 searchBox.addEventListener('input',(e)=>{
     let searchedList = searchProductData(e.target.value);
     renderProductData(searchedList);
@@ -73,7 +78,7 @@ function sortNameDesc(){
 function sortPriceAsc(){
 
     let sortedList = productList.sort((a,b)=>{
-        return (a.price > b.price) ? 1: -1;
+        return (parseFloat(a.price) > parseFloat(b.price)) ? 1: -1;
     });
     renderProductData(sortedList);
     
@@ -82,7 +87,7 @@ function sortPriceAsc(){
 function sortPriceDesc(){
 
     let sortedList = productList.sort((a,b)=>{
-        return (b.price > a.price) ? 1: -1;
+        return (parseFloat(b.price) > parseFloat(a.price)) ? 1: -1;
     });
     renderProductData(sortedList);
     
@@ -107,37 +112,9 @@ function sortProducts(property, order = 'asc') {
       }
     });
     renderProductData(sortedList);
-  }
-
-function sortProductByName(){
-    let sortedList = productList.sort((a,b)=>{
-        return a.name > b.name ? 1 : -1;
-       
-    })
-    
-    renderProductData(sortedList);
-    // let sortedList = productList;
-    // productList.sort((a,b)=>{
-
-    //     let product2 = a.name.toLowerCase();
-    //     let product1 = b.name.toLowerCase();
-
-    //     console.log(b.name.toLowerCase());
-
-    //     if(product1 > product2){
-    //         return 1;
-    //     }
-
-    //     if(product1 < product2){
-    //         return -1;
-    //     }
-
-    //     return 0;
-    //     // return b.price-a.price > 0 ? a.price-b.price : b.price-a.price;
-    // })
-    // renderProductData();
 }
 
+// SEARCH PRODUCT DATA
 function searchProductData(searchQuery){
     console.log(searchQuery);
     if(!searchQuery){
@@ -148,6 +125,7 @@ function searchProductData(searchQuery){
     }
 }
 
+// DELETE PRODUCT DATA
 function deleteProductData(delButton){
     const productID = delButton.parentNode.parentNode.firstElementChild.innerText;
     productList = productList.filter(product=>product.id!=productID)
@@ -155,10 +133,11 @@ function deleteProductData(delButton){
     renderProductData();
 }
 
+// ADD PRODUCT DATA
 function addProductData(){
 
     let newProduct = {
-        id : ++index,
+        id : Date.now().toString().slice(7),
         name : productName.value,
         price : productPrice.value,
         image : curImageFileURL,
@@ -169,12 +148,12 @@ function addProductData(){
     localStorage.setItem('productList',JSON.stringify(productList));
     renderProductData();
     productForm.reset();
-
+    curImageFileURL = '';
 }
 
+// RENDER PRODUCT DATA
 function renderProductData(list=productList){
 
-    // let productList = localStorage.getItem('productList')!=null ? JSON.parse(localStorage.getItem('productList')) : [] ;
     console.log(list);
     let html='';
     list.forEach(product=>{
@@ -187,8 +166,10 @@ function renderProductData(list=productList){
             <td>${product.name}</td>
             <td>${product.price}</td>
             <td>
-                <button onclick=editProductData(this) class="btn-edit p-2 me-2"><i class="fa-solid fa-pen-to-square"></i></button>
-                <button onclick=deleteProductData(this) class="btn-delete p-2"><i class="fa-solid fa-trash"></i></button>
+                <button onclick=editProductData(this) class="btn-edit p-2 me-2">
+                <a href="./view.html?id=${product.id}"><i class="fa-solid fa-pen-to-square"></i></a>
+                </button>
+                <button onclick=deleteProductData(this) class="btn-delete p-2" ><i class="fa-solid fa-trash"></i></button>
             </td>
         </tr>`
     })

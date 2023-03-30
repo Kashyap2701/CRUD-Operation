@@ -30,14 +30,14 @@
                     <h1 class="text-white">Product Management System</h1>
                 </header>
 
-                <!-- ---------------------------------- Add Product ----------------------------------- -->
+                <!-- ---------------------------------- ADD PRODUCT SECTION ----------------------------------- -->
 
                 <section class="add-product-section p-4 rounded-3 mb-3">
                     
                     <form id="add-product-form" >
 
                         <div class="section-header mb-4 d-flex align-items-center">
-                            <h5 class="flex-grow-1 text-primary-color">Add Product</h5>
+                            <h4  class="flex-grow-1 text-primary-color">Add Product</h4  >
                             <div class="search-box d-flex">
                                 <button id="add-product" type="submit" class="bg-primary-color text-white p-2">Add Product</button>
                             </div>
@@ -47,22 +47,22 @@
     
                             <div class="row">
                                 <div class="d-flex flex-column col" >
-                                    <label for="product-name" class=" text-dark mb-2">Name of Product *</label>
-                                    <input id="product-name" class="mb-2" type="text" placeholder="Enter a name" required >
+                                    <label for="product-name" class=" text-secondry-color mb-2">Name of Product *</label>
+                                    <input id="product-name" class="mb-2 p-2" type="text" placeholder="Enter a name" required >
                                 </div>
                                 <div class="d-flex flex-column col">
-                                    <label for="product-price"  class="mb-2">Price*</label>
-                                    <input id="product-price" class="mb-2" type="number" min="0" step="0.01" placeholder="Enter a price" required>
+                                    <label for="product-price"  class="text-secondry-color mb-2">Price*</label>
+                                    <input id="product-price" class="mb-2 p-2" type="number" min="0" step="0.01" title="Enter Number only" placeholder="Enter a price" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div  class="d-flex flex-column col">
-                                    <label for="product-img"  class="mb-2">Upload Image*</label>
-                                    <input id="product-img" class="mb-2" type="file" placeholder="Upload" >
+                                    <label for="product-img"  class="text-secondry-color mb-2">Upload Image*</label>
+                                    <input id="product-img" class="mb-2 p-1" type="file" placeholder="Upload" >
                                 </div>
                                 <div  class="d-flex flex-column col">
-                                    <label for="product-desc"  class="mb-2">Description</label>
-                                    <textarea id="product-desc" class="mb-2" type="text" placeholder="add a description"></textarea>
+                                    <label for="product-desc"  class="text-secondry-color mb-2">Description</label>
+                                    <textarea id="product-desc" class="mb-2 p-2" type="text" placeholder="add a description"></textarea>
                                 </div>
                             </div>
 
@@ -70,15 +70,15 @@
 
                 </section>
 
-                <!-- ---------------------------------- Show Product ----------------------------------- -->
+                <!-- ---------------------------------- SHOW PRODUCT SECTION ----------------------------------- -->
 
                 <section class="product-list-section p-4 rounded-3 mb-3">
 
                     <div class="section-header mb-4 d-flex align-items-center">
-                        <h5 class="flex-grow-1 text-primary-color">Product list</h5>
+                        <h4 class="flex-grow-1 text-primary-color">Product list</h4>
                         <div class="search-box d-flex">
+                            <input id="search-input" class="ps-2" type="search" pattern="[0-9]+" placeholder="search Id"/>
                             <i class="fa-solid fa-magnifying-glass bg-light p-2 text-dark rounded-start"></i>
-                            <input id="search-input" type="search" placeholder="search product ID"/>
                         </div>
                     </div>
 
@@ -98,7 +98,7 @@
                                     <i onclick="sortNameAsc()" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
                                     <i onclick="sortNameDesc()" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
                                 </th>
-                                <th>price 
+                                <th>Price 
                                     <i onclick="sortPriceAsc()" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
                                     <i onclick="sortPriceDesc()" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
                                 </th>
@@ -106,13 +106,33 @@
                               </tr>
                             </thead>
                             <tbody>
-                                <!-- here products are listed -->
+                                <!-- HERE PRODUCTS ARE LISTED -->
                             </tbody>
                         </table>  
                     </div>
 
                 </section>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
 
+                
             </div>
 
         </div>
@@ -121,9 +141,9 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
 
     </body>
 
