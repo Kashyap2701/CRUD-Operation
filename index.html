@@ -27,14 +27,14 @@
             <div class="container">
 
                 <header class="p-3 mb-3 d-flex">
-                    <h1 class="text-white">Product Management System</h1>
+                    <h1 class="text-white fw-bold">Product Management System</h1>
                 </header>
 
                 <!-- ---------------------------------- ADD PRODUCT SECTION ----------------------------------- -->
 
                 <section class="add-product-section p-4 rounded-3 mb-3">
                     
-                    <form id="add-product-form" >
+                    <form autocomplete="off" id="add-product-form" >
 
                         <div class="section-header mb-4 d-flex align-items-center">
                             <h4  class="flex-grow-1 text-primary-color">Add Product</h4  >
@@ -48,21 +48,50 @@
                             <div class="row">
                                 <div class="d-flex flex-column col" >
                                     <label for="product-name" class=" text-secondry-color mb-2">Name of Product *</label>
-                                    <input id="product-name" class="mb-2 p-2" type="text" placeholder="Enter a name" required >
+                                    <input 
+                                        id="product-name" 
+                                        class="mb-2 p-2" 
+                                        type="text"
+                                        pattern="^[a-zA-Z0-9\s\-'_\(\)]+$" 
+                                        placeholder="Enter a name" 
+                                        required >
                                 </div>
                                 <div class="d-flex flex-column col">
                                     <label for="product-price"  class="text-secondry-color mb-2">Price*</label>
-                                    <input id="product-price" class="mb-2 p-2" type="number" min="0" step="0.01" title="Enter Number only" placeholder="Enter a price" required>
+                                    <input 
+                                        id="product-price" 
+                                        class="mb-2 p-2" 
+                                        type="number" 
+                                        min="0" 
+                                        step="0.01" 
+                                        pattern="^(0|[1-9]\d*)(\.\d{1,2}0*)?$"
+                                        title="Product price must be a decimal number (with up to two decimal places)" 
+                                        placeholder="Enter a price" 
+                                        required
+                                    >
                                 </div>
                             </div>
                             <div class="row">
                                 <div  class="d-flex flex-column col">
-                                    <label for="product-img"  class="text-secondry-color mb-2">Upload Image*</label>
-                                    <input id="product-img" class="mb-2 p-1" type="file" placeholder="Upload" >
+                                    <label for="product-img" class="text-secondry-color mb-2">Upload Image*</label>
+                                    <input 
+                                        id="product-img" 
+                                        class="mb-2" 
+                                        type="file" 
+                                        accept=".jpg,.jpeg,.png,.gif" 
+                                        title="Product Image must be in .jpg,.jpeg,.png,.gif"
+                                        placeholder="Upload" 
+                                        required
+                                    >
                                 </div>
                                 <div  class="d-flex flex-column col">
                                     <label for="product-desc"  class="text-secondry-color mb-2">Description</label>
-                                    <textarea id="product-desc" class="mb-2 p-2" type="text" placeholder="add a description"></textarea>
+                                    <textarea 
+                                        id="product-desc" 
+                                        class="mb-2 p-2" 
+                                        type="text" 
+                                        placeholder="add a description"
+                                    ></textarea>
                                 </div>
                             </div>
 
@@ -77,7 +106,7 @@
                     <div class="section-header mb-4 d-flex align-items-center">
                         <h4 class="flex-grow-1 text-primary-color">Product list</h4>
                         <div class="search-box d-flex">
-                            <input id="search-input" class="ps-2" type="search" pattern="[0-9]+" placeholder="search Id"/>
+                            <input id="search-input" class="ps-2" type="search" pattern="^[0-9]+$" placeholder="search Id"/>
                             <i class="fa-solid fa-magnifying-glass bg-light p-2 text-dark rounded-start"></i>
                         </div>
                     </div>
@@ -88,50 +117,33 @@
                               <tr class="bg-light">
                                 <th>
                                     #ID 
-                                    <i onclick="sortIdAsc()" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
-                                    <i onclick="sortIdDesc()" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
+                                    <i onclick="sortProducts('id','asc')" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
+                                    <i onclick="sortProducts('id','desc')" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
                                 </th>
                                 <th>Image
                                    
                                 </th>
                                 <th>Name
-                                    <i onclick="sortNameAsc()" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
-                                    <i onclick="sortNameDesc()" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
+                                    <i onclick="sortProducts('name','asc')" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
+                                    <i onclick="sortProducts('name','desc')" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
                                 </th>
                                 <th>Price 
-                                    <i onclick="sortPriceAsc()" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
-                                    <i onclick="sortPriceDesc()" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
+                                    <i onclick="sortProducts('price','asc')" class="fa-solid fa-arrow-up mx-1 text-secondry-color"></i>
+                                    <i onclick="sortProducts('price','desc')" class="fa-sharp fa-solid fa-arrow-down me-1 text-secondry-color"></i>
                                 </th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <!-- HERE PRODUCTS ARE LISTED -->
                             </tbody>
                         </table>  
+                        <!-- <div class="image-wrapper">
+                            <img src="./Images/No-Image.png" alt="" class="w-100 h-100 object-fit-contain">
+                        </div> -->
                     </div>
 
                 </section>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-fullscreen">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                        
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
                 
             </div>
 

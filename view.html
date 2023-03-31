@@ -20,53 +20,87 @@
 
     <body>
         
-        <section class="section-wrapper bg-primary-color vh-100 vw-100">
+        <section id="update-product-form" class="section-wrapper bg-primary-color vh-100 vw-100">
 
             <div class="container vh-100 d-flex align-items-center">
 
                 <div style="height: 600px;" class=" row view-product-container d-flex bg-white w-100 mx-5 rounded-2 position-relative">
 
-                    <a class="p-0 position-absolute" href="./index.html"><i class="fa-solid fa-circle-xmark m-2 text-primary-color p-0 fs-3 ps-2 pt-2"></i></a>
+                    <a class="p-0 position-absolute w-auto" href="./index.html"><i class="fa-solid fa-circle-xmark m-2 text-primary-color p-0 fs-3 ps-2 pt-2"></i></a>
 
                     <div class="product-image-container d-flex align-items-center col-7 px-3 text-center justify-content-center">
 
                         <div class="image-wrapper">
-                            <img id="product-img" src="./Images/book-1.png" class="h-100 w-100 object-fit-cover " alt="">
+                            <img id="product-img" src="./Images/No-Image.png" class="h-100 w-100 object-fit-cover " alt="">
                         </div>
 
                     </div>
 
-                    <div class="product-data-container h-100 d-flex col-5 flex-column p-5 justify-items-center">
+                    <!-- FORM TO UPDATE PRODUCT DATA -->
+
+                    <form class="product-data-container h-100 d-flex col-5 flex-column p-4 justify-items-center">
 
                         <div class="row">
                             <div class=" col-8 form-check form-switch mb-2">
                                 <input value="off" class="form-check-input text-primary-color" type="checkbox" id="edit-mode">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Edit Mode</label>
                             </div>
-                            <button id="edit-product-btn" class="col-4 px-3 py-2 bg-primary-color text-white d-none">Update</button>
                         </div>
 
                         <div class="d-flex flex-column mb-3">
                             <label for="product-name" class="mb-2">Name</label>
-                            <input id="product-name" class="px-2 py-1" type="text" value="" readonly>
+                            <input 
+                                id="product-name" 
+                                class="px-2 py-1" 
+                                type="text"
+                                pattern="^[a-zA-Z0-9\s\-'_\(\)]+$" 
+                                readonly 
+                                required 
+                            >
                         </div>
 
                         <div class="d-flex flex-column mb-3">
                             <label for="product-price" class="mb-2">Price</label>
-                            <input id="product-price" type="text" class="px-2 py-1" value="" readonly>
+                            <input 
+                                id="product-price"
+                                class="px-2 py-1" 
+                                type="number" 
+                                min="0" 
+                                step="0.01" 
+                                title="Product price must be a decimal number (with up to two decimal places)"
+                                readonly 
+                                required
+                            >
                         </div>
 
                         <div class="d-flex flex-column mb-3">
                             <label for="product-desc" class="mb-2">Description</label>
-                            <textarea id="product-desc" class="px-2 py-1" rows="6" value="" readonly></textarea>
+                            <textarea 
+                                id="product-desc" 
+                                class="px-2 py-1" 
+                                rows="6" 
+                                value="" 
+                                readonly
+                            ></textarea>
                         </div>
 
-                        <div id="upload-image" class="d-flex flex-column col d-none">
+                        <div id="upload-image" class="d-flex flex-column mb-3 d-none">
                             <label for="new-product-img"  class="text-secondry-color mb-2">Upload Image*</label>
-                            <input id="new-product-img" class="mb-2 p-1 " type="file" placeholder="Upload" >
+                            <input 
+                                id="new-product-img" 
+                                class="mb-2 w-100" 
+                                type="file" 
+                                placeholder="Upload" 
+                                accept=".jpg,.jpeg,.png,.gif" 
+                                title="Product Image must be .jpg,.jpeg,.png,.gif"
+                            >
                         </div>
 
-                    </div>
+                        <div class="text-end">
+                            <button type="submit" id="update-product-btn" class="col-4 px-3 py-2 bg-primary-color text-white d-none justify-content-end">Update</button>
+                        </div>
+
+                    </form>
 
                 </div>
 

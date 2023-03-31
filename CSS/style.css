@@ -20,9 +20,13 @@ body{
     font-family: 'Inter', sans-serif;
 }
 
-a { 
+a{ 
     text-decoration: none;
     color: inherit; 
+}
+
+a:hover{
+    color: white;
 }
 
 ul, ol {
@@ -34,23 +38,16 @@ label{
     color: var(--secondry-color);
 }
 
-a{
-    text-decoration: none;
-}
-
-a:hover{
-    color: inherit;
-}
-
 input, textarea {
     border-radius: 3px;
     border-color: var(--light-color);
     background-color: var(--light-color);
-    font-weight: 500;
+    font-weight: 400;
 }
 
 input:focus, textarea:focus{
-    outline:none;
+    outline: none;
+    border: 1px solid var(--primary-color);
 }
 
 input::placeholder, textarea::placeholder{
@@ -74,11 +71,11 @@ input[type=checkbox]:checked + label{
     color: var(--primary-color);
 }
 
-input:invalid{
+input:focus:invalid{
     border : 1px solid #d83d4a;
 }
 
-input, input:valid{
+input{
     border : 1px solid var(--light-color);
 }
 
@@ -91,13 +88,8 @@ input::file-selector-button {
    margin-right: 5px;
 }
 
-
-#file-button{
-    background-color: var(--primary-color);
-}
-
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 800;
+    /* font-weight: 800; */
     margin: 0;
 }
 
@@ -123,7 +115,6 @@ table{
 
 td,th{
     padding: 0.5rem;
-    text-align: center;
     border-bottom: 1px solid #f3f4f9;
 }
 
@@ -157,7 +148,7 @@ background-color: #f2f2f2;
 }
 
 ::-webkit-scrollbar-thumb {
-background-color: var(--secondry-color);
+background-color: var(--primary-color);
 border-radius: 5px;
 }
 

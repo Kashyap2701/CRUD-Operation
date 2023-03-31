@@ -11,11 +11,10 @@ const productDescription = document.querySelector('#product-desc');
 let productList = JSON.parse(localStorage.getItem('productList')) || [];
 
 let curImageFileURL='';
-// let index=0;
 
 window.onload = renderProductData();
 
-// IMAGE FILE CHANGE EVENT
+// EVENT IMAGE FILE CHANGE 
 productImageFile.addEventListener('change',(e)=>{
     console.log(e.target.files[0]);
     let reader = new FileReader();
@@ -27,89 +26,50 @@ productImageFile.addEventListener('change',(e)=>{
     
 })
 
-// ADD DATA FORM SUBMIT EVENT
+// EVENT ADD DATA FORM SUBMIT 
 productForm.addEventListener('submit',(e)=>{
+
     e.preventDefault();
-    addProductData();
+    let newProduct = {
+        id : Date.now().toString().slice(7),
+        name : productName.value.trim(),
+        price : productPrice.value,
+        image : curImageFileURL || `./Images/No-Image.png`,
+        desc : productDescription.value.trim()
+    }
+    addProductData(newProduct);
+
 })
 
-// SEARCH DATA EVENT
+// EVENT SEARCH DATA 
 searchBox.addEventListener('input',(e)=>{
     let searchedList = searchProductData(e.target.value);
     renderProductData(searchedList);
 })
 
-function sortIdAsc(){
-
-    let sortedList = productList.sort((a,b)=>{
-        return (a.id > b.id) ? 1: -1;
-    });
-    renderProductData(sortedList);
-    
-}
-
-function sortIdDesc(){
-
-    let sortedList = productList.sort((a,b)=>{
-        return (b.id > a.id) ? 1: -1;
-    });
-    renderProductData(sortedList);
-    
-}
-
-function sortNameAsc(){
-
-    let sortedList = productList.sort((a,b)=>{
-        return (a.name > b.name) ? 1: -1;
-    });
-    renderProductData(sortedList);
-    
-}
-
-function sortNameDesc(){
-
-    let sortedList = productList.sort((a,b)=>{
-        return (b.name > a.name) ? 1: -1;
-    });
-    renderProductData(sortedList);
-    
-}
-
-function sortPriceAsc(){
-
-    let sortedList = productList.sort((a,b)=>{
-        return (parseFloat(a.price) > parseFloat(b.price)) ? 1: -1;
-    });
-    renderProductData(sortedList);
-    
-}
-
-function sortPriceDesc(){
-
-    let sortedList = productList.sort((a,b)=>{
-        return (parseFloat(b.price) > parseFloat(a.price)) ? 1: -1;
-    });
-    renderProductData(sortedList);
-    
-}
-
-function sortProductByPrice(){
-    
-    let sortedList = productList.sort((a,b)=>{
-        return a.price > b.price ? 1 : -1;
-        // return b.price-a.price > 0 ? a.price-b.price : b.price-a.price;
-    })
-    
-    renderProductData(sortedList);
-}
-
+// SORT PRODUCT DATA 
 function sortProducts(property, order = 'asc') {
     const sortedList = productList.sort((a, b) => {
-      if (order === 'asc') {
-        return a[property] > b[property] ? 1 : -1;
-      } else {
-        return b[property] > a[property] ? 1 : -1;
-      }
+
+        if (order === 'asc') {
+
+            if(property=='name')
+                return a[property].toLowerCase() > b[property].toLowerCase() ? 1 : -1;
+            else if(property=='price')
+                return parseFloat(a[property]) > parseFloat(b[property]) ? 1 : -1;
+            else 
+                return a[property] > b[property] ? 1 : -1;
+
+        } else {
+
+            if(property == 'name')
+                return b[property].toLowerCase() > a[property].toLowerCase() ? 1 : -1;
+            else if(property=='price')
+                return parseFloat(b[property]) > parseFloat(a[property]) ? 1 : -1;
+            else 
+                return b[property] > a[property] ? 1 : -1;
+
+        }
     });
     renderProductData(sortedList);
 }
@@ -134,15 +94,7 @@ function deleteProductData(delButton){
 }
 
 // ADD PRODUCT DATA
-function addProductData(){
-
-    let newProduct = {
-        id : Date.now().toString().slice(7),
-        name : productName.value,
-        price : productPrice.value,
-        image : curImageFileURL,
-        desc : productDescription.value
-    }
+function addProductData(newProduct){
 
     productList.push(newProduct);
     localStorage.setItem('productList',JSON.stringify(productList));
@@ -165,7 +117,7 @@ function renderProductData(list=productList){
             </td>
             <td>${product.name}</td>
             <td>${product.price}</td>
-            <td>
+            <td class="text-center">
                 <button onclick=editProductData(this) class="btn-edit p-2 me-2">
                 <a href="./view.html?id=${product.id}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </button>

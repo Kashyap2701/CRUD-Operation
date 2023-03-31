@@ -3,9 +3,10 @@ const newProductImageFile = document.getElementById('new-product-img');
 const productName = document.querySelector('#product-name');
 const productPrice = document.querySelector('#product-price');
 const productDescription = document.querySelector('#product-desc');
-const updateButton = document.getElementById('edit-product-btn');
+const updateButton = document.getElementById('update-product-btn');
 const uploadImageBox = document.getElementById('upload-image');
 const editMode = document.querySelector('#edit-mode');
+const productUpdateForm = document.getElementById('update-product-form');
 
 
 let productList = JSON.parse(localStorage.getItem('productList')) || [];
@@ -19,7 +20,7 @@ let product = productList.filter(product => product.id === urlId)[0];
 
 window.onload = viewProductData(urlId);
 
-// IMAGE FILE CHANGE EVENT
+// Event listener for when a new product-image is selected
 newProductImageFile.addEventListener('change',(e)=>{
     console.log(e.target.files[0]);
     let reader = new FileReader();
@@ -30,44 +31,49 @@ newProductImageFile.addEventListener('change',(e)=>{
     reader.readAsDataURL(newProductImageFile.files[0]);
 })
 
+// Event listener for when the update button is submitted
+productUpdateForm.addEventListener('submit',(e)=>{
 
-updateButton.addEventListener('click',(e)=>{
-
+    e.preventDefault();
+    console.log('sdfds');
     let newData = {
-        name : productName.value,
+        name : productName.value.trim(),
         price : productPrice.value,
-        desc : productDescription.value,
+        desc : productDescription.value.trim(),
         image : curImageFileURL || product.image
     }
 
     curImageFileURL = '';
     updateProductData(newData);
+    editMode.click(); // explicitly click edit mode
 })
 
+// Function to update the product data
 function updateProductData(newProduct){
 
-    const index = productList.findIndex(product=>product.id==urlId);
+  const index = productList.findIndex(product=>product.id==urlId);
 
-    console.log(index);
-    productList[index].name = newProduct.name;
-    productList[index].price = newProduct.price;
-    productList[index].image = newProduct.image;
-    productList[index].desc = newProduct.desc;
+  productList[index].name = newProduct.name;
+  productList[index].price = newProduct.price;
+  productList[index].image = newProduct.image;
+  productList[index].desc = newProduct.desc;
 
-    localStorage.setItem('productList',JSON.stringify(productList));
-    location.reload();
+  localStorage.setItem('productList',JSON.stringify(productList));
+
 
 }
 
+// Function to view the product data
 function viewProductData(){
     
-    productName.value = product.name;
-    productPrice.value = product.price;
-    productDescription.value = product.desc;
-    productImageFile.src = product.image || `./Images/default-image.png`;
+  productName.value = product.name;
+  productPrice.value = product.price;
+  productDescription.value = product.desc;
+  productImageFile.src = product.image || `./Images/No-Image.png`;
 
 }
 
+// Event listener for the edit mode button
 editMode.addEventListener('click', () => {
     const inputElements = document.querySelectorAll('input, textarea');
   
