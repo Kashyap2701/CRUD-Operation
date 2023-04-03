@@ -11,6 +11,7 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+        <!-- external CSS  -->
         <link rel="stylesheet" href="./CSS/style.css">
 
         <!-- font awesome icon link -->
@@ -22,13 +23,13 @@
         
         <section id="update-product-form" class="section-wrapper bg-primary-color vh-100 vw-100">
 
-            <div class="container vh-100 d-flex align-items-center">
+            <div class="container-sm container-fluid vh-100 d-flex align-items-center">
 
-                <div style="height: 600px;" class=" row view-product-container d-flex bg-white w-100 mx-5 rounded-2 position-relative">
+                <div class="row view-product-container d-flex bg-white w-100 mx-sm-5 mx-1 rounded-2 position-relative flex-sm-column flex-md-row">
 
                     <a class="p-0 position-absolute w-auto" href="./index.html"><i class="fa-solid fa-circle-xmark m-2 text-primary-color p-0 fs-3 ps-2 pt-2"></i></a>
 
-                    <div class="product-image-container d-flex align-items-center col-7 px-3 text-center justify-content-center">
+                    <div class="product-image-container d-flex align-items-center col-6 px-3 text-center justify-content-center">
 
                         <div class="image-wrapper">
                             <img id="product-img" src="./Images/No-Image.png" class="h-100 w-100 object-fit-cover " alt="">
@@ -36,13 +37,13 @@
 
                     </div>
 
-                    <!-- FORM TO UPDATE PRODUCT DATA -->
+                    <!-- FORM TO EDIT/UPDATE PRODUCT DATA -->
 
-                    <form class="product-data-container h-100 d-flex col-5 flex-column p-4 justify-items-center">
+                    <form class="product-data-container h-100 d-flex col-6 flex-column p-4 justify-items-center">
 
                         <div class="row">
                             <div class=" col-8 form-check form-switch mb-2">
-                                <input value="off" class="form-check-input text-primary-color" type="checkbox" id="edit-mode">
+                                <input value="off" class="form-check-input text-primary-color" type="checkbox" id="edit-mode" >
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Edit Mode</label>
                             </div>
                         </div>
@@ -54,6 +55,7 @@
                                 class="px-2 py-1" 
                                 type="text"
                                 pattern="^[a-zA-Z0-9\s\-'_\(\)]+$" 
+                                placeholder="Enter a name" 
                                 readonly 
                                 required 
                             >
@@ -68,6 +70,7 @@
                                 min="0" 
                                 step="0.01" 
                                 title="Product price must be a decimal number (with up to two decimal places)"
+                                placeholder="Enter a Price" 
                                 readonly 
                                 required
                             >
@@ -80,6 +83,7 @@
                                 class="px-2 py-1" 
                                 rows="6" 
                                 value="" 
+                                placeholder="Enter a Description" 
                                 readonly
                             ></textarea>
                         </div>
@@ -110,8 +114,10 @@
 
     </body>
 
+    <!-- external Js file -->
     <script src="./JS/view.js"></script>
 
+    <!-- Bootstrap Js file -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </html>

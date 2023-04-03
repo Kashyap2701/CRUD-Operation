@@ -13,6 +13,7 @@ let productList = JSON.parse(localStorage.getItem('productList')) || [];
 
 let curImageFileURL = '';
 
+// Fetch the Product id from URL
 let urlparams = new URLSearchParams(window.location.search);
 const urlId = urlparams.get('id');
 
@@ -48,6 +49,27 @@ productUpdateForm.addEventListener('submit',(e)=>{
     editMode.click(); // explicitly click edit mode
 })
 
+// Event listener for the edit mode button
+editMode.addEventListener('click', () => {
+  const inputElements = document.querySelectorAll('input, textarea');
+
+  if (editMode.value === 'off') {
+    editMode.value = 'on';
+    inputElements.forEach(inputElement => {
+      inputElement.removeAttribute('readonly');
+    });
+  } else {
+    editMode.value = 'off';
+    inputElements.forEach(inputElement => {
+      inputElement.readOnly = true;
+    });
+    viewProductData();
+  }
+
+  updateButton.classList.toggle('d-none');
+  uploadImageBox.classList.toggle('d-none');
+});
+
 // Function to update the product data
 function updateProductData(newProduct){
 
@@ -73,24 +95,4 @@ function viewProductData(){
 
 }
 
-// Event listener for the edit mode button
-editMode.addEventListener('click', () => {
-    const inputElements = document.querySelectorAll('input, textarea');
-  
-    if (editMode.value === 'off') {
-      editMode.value = 'on';
-      inputElements.forEach(inputElement => {
-        inputElement.removeAttribute('readonly');
-      });
-    } else {
-      editMode.value = 'off';
-      inputElements.forEach(inputElement => {
-        inputElement.readOnly = true;
-      });
-      viewProductData();
-    }
-  
-    updateButton.classList.toggle('d-none');
-    uploadImageBox.classList.toggle('d-none');
-  });
   

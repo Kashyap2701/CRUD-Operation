@@ -14,7 +14,7 @@ let curImageFileURL='';
 
 window.onload = renderProductData();
 
-// EVENT IMAGE FILE CHANGE 
+// Event Listener On Image Change  
 productImageFile.addEventListener('change',(e)=>{
     console.log(e.target.files[0]);
     let reader = new FileReader();
@@ -26,7 +26,7 @@ productImageFile.addEventListener('change',(e)=>{
     
 })
 
-// EVENT ADD DATA FORM SUBMIT 
+// Event Listener On Form Submit
 productForm.addEventListener('submit',(e)=>{
 
     e.preventDefault();
@@ -41,13 +41,56 @@ productForm.addEventListener('submit',(e)=>{
 
 })
 
-// EVENT SEARCH DATA 
+// Event Listener On Search Input
 searchBox.addEventListener('input',(e)=>{
     let searchedList = searchProductData(e.target.value);
     renderProductData(searchedList);
 })
 
-// SORT PRODUCT DATA 
+// Function to Add Data on Local Storage
+function addProductData(newProduct){
+
+    productList.push(newProduct);
+    localStorage.setItem('productList',JSON.stringify(productList));
+    renderProductData();
+    productForm.reset();
+    curImageFileURL = '';
+}
+
+// Function to Delete Data on Local Storage
+function deleteProductData(delButton){
+    const productID = delButton.parentNode.parentNode.firstElementChild.innerText;
+    productList = productList.filter(product=>product.id!=productID)
+    localStorage.setItem('productList',JSON.stringify(productList));
+    renderProductData();
+}
+
+// Function to render data on DOM
+function renderProductData(list=productList){
+
+    console.log(list);
+    let html='';
+    list.forEach(product=>{
+        html += 
+        `<tr>
+            <td>${product.id}</td>
+            <td>
+                <img class="rounded-circle object-fit-cover" src="${product.image}" alt="" width="30px" height="30px">
+            </td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td class="text-center">
+                <button onclick=editProductData(this) class="btn-edit p-sm-2 p-1 me-2">
+                <a href="./view.html?id=${product.id}"><i class="fa-solid fa-pen-to-square"></i></a>
+                </button>
+                <button onclick=deleteProductData(this) class="btn-delete p-sm-2 p-1" ><i class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>`
+    })
+    productsTable.innerHTML = html;
+}
+
+// Function For Sorting Product Asc & Desc
 function sortProducts(property, order = 'asc') {
     const sortedList = productList.sort((a, b) => {
 
@@ -74,7 +117,7 @@ function sortProducts(property, order = 'asc') {
     renderProductData(sortedList);
 }
 
-// SEARCH PRODUCT DATA
+// Function For Search Data Based On Searcg Query
 function searchProductData(searchQuery){
     console.log(searchQuery);
     if(!searchQuery){
@@ -83,47 +126,4 @@ function searchProductData(searchQuery){
     else{
         return productList.filter((product)=>{return product.id.toString().includes(searchQuery)})
     }
-}
-
-// DELETE PRODUCT DATA
-function deleteProductData(delButton){
-    const productID = delButton.parentNode.parentNode.firstElementChild.innerText;
-    productList = productList.filter(product=>product.id!=productID)
-    localStorage.setItem('productList',JSON.stringify(productList));
-    renderProductData();
-}
-
-// ADD PRODUCT DATA
-function addProductData(newProduct){
-
-    productList.push(newProduct);
-    localStorage.setItem('productList',JSON.stringify(productList));
-    renderProductData();
-    productForm.reset();
-    curImageFileURL = '';
-}
-
-// RENDER PRODUCT DATA
-function renderProductData(list=productList){
-
-    console.log(list);
-    let html='';
-    list.forEach(product=>{
-        html += 
-        `<tr>
-            <td>${product.id}</td>
-            <td>
-                <img class="rounded-circle object-fit-cover" src="${product.image}" alt="" width="30px" height="30px">
-            </td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td class="text-center">
-                <button onclick=editProductData(this) class="btn-edit p-2 me-2">
-                <a href="./view.html?id=${product.id}"><i class="fa-solid fa-pen-to-square"></i></a>
-                </button>
-                <button onclick=deleteProductData(this) class="btn-delete p-2" ><i class="fa-solid fa-trash"></i></button>
-            </td>
-        </tr>`
-    })
-    productsTable.innerHTML = html;
 }
